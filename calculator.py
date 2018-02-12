@@ -88,17 +88,31 @@ def do_math():
     mem['y'] = float(_display.get())
     mem['act'] = []
     if mem['math'] == '+':
-        res = mem['x'] + mem['y']
+        res = float(mem['x'] + mem['y'])
     elif mem['math'] == '-':
-        res = mem['x'] - mem['y']
+        res = float(mem['x'] - mem['y'])
     elif mem['math'] == '*':
-        res = mem['x'] * mem['y']
+        res = float(mem['x'] * mem['y'])
     elif mem['math'] == '/':
-        res = mem['x'] / mem['y']
+        res = float(mem['x'] / mem['y'])
     else:
         None
-    _display.set(res)
-    print(mem)
+    _display.set(display_settings(res))    
+    #_display.set(str(res)[0:12])
+    print(res) # test print
+    print(mem) # test print
+# this function limits the output to 12 characters
+def display_settings(arg):
+    if 'e' in str(arg):
+        degree = str(arg)[-3:]
+        print(arg) # test print
+        arg = arg / float("1e"+degree)
+        arg = str(arg)[0:8]
+        print(arg) # test print
+        print(degree) # test print
+    else:
+        None
+    return float(str(arg)+'e'+str(degree))
 
 # here comes the GUI #
 if __name__ == '__main__':
